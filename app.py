@@ -6,28 +6,33 @@ import re
 
 app = Flask(__name__)
 
-
 class Data:
 
+    post = {}
     row_count = 1
 
 
 @app.route("/", methods=['GET', 'POST'])
 def root():
-    post = None
     if request.method == "POST":
         post = request.get_data().decode("UTF-8")
         post = parse_qsl(post, keep_blank_values=True)
         post = {k:v for k,v in post}
+
         if post["submit-type"] == "clear":
             Data.row_count = 1
+            Data.post = {}
         elif post["submit-type"] == "add-row":
+            Data.post = post
             Data.row_count += 1
         elif post["submit-type"] == "rm-row":
+            Data.post = post
             Data.row_count = 1 if Data.row_count < 2 else Data.row_count - 1
+
     else:
         pass
-    return render_template("index.html", data=post, row_count=Data.row_count)
+
+    return render_template("index.html", post=Data.post, row_count=Data.row_count)
 
 
 if __name__ == "__main__":

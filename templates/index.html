@@ -16,16 +16,12 @@
         <div>
             <table>
 
-                {% for i in range(row_count) %}
+
                 <tr>
                     <td>
-                        <input type="text" id="word" name="word" placeholder="Word to search for">
+                        <p>Date Range:</p>
+
                     </td>
-                    <td>
-                        <input type="text" id="sub" name="sub" placeholder="Optional: sub reddit">
-                    </td> 
-
-
                     <!-- START DATE -->
                     <td>            
                         <!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
@@ -83,24 +79,38 @@
                         </div>
                 
                     </td>
-                      
+                        
                     <td>
                         <input type="number" id="end-day" name="end-day" min="1" max="31" value="1" placeholder="Day" style="width:50px">
                     </td>
                     <td>
                         <input type="number" id="end-year" name="end-year" placeholder="Year" min="2016" max="2020" value="2020">
                     </td>
-                    {% if i == row_count-1 %}
+                </tr>
+            </table>
+            <table>
 
+                {% for i in range(row_count) %}
+                <tr>
+                    <td>
+                        <input type="text" id="word" name="word{{i}}" value="{{ post['word{0}'.format(i)] }}" placeholder="Word to search for">
+                    </td>
+                    <td>
+                        <input type="text" id="sub" name="sub{{i}}" value="{{ post['sub{0}'.format(i)] }}" placeholder="Optional: sub reddit">
+                    </td> 
+
+                    <button id="no-change" type="submit" name="no-change" onclick="onSubmit('no-change')">yuh</button>
+
+                    {% if i == row_count-1 %}
                     <td>
                         <button id="add-row" name="add-row" type="submit" onclick="onSubmit('add-row')">+</button>
                     </td>
-                    
-                    {% if i != 0 %}
-                    <td>
-                        <button id="rm-row" name="rm-row" type="submit" onclick="onSubmit('rm-row')">-</button>
-                    </td>
-                    {% endif %}
+
+                        {% if i != 0 %}
+                        <td>
+                            <button id="rm-row" name="rm-row" type="submit" onclick="onSubmit('rm-row')">-</button>
+                        </td>
+                        {% endif %}
 
                     {% endif %}
                 </tr>
@@ -112,8 +122,8 @@
                 </tr>
             </table>
         </div>
-    
-        <p> {{ data }} </p>
+        
+        <p> {{ post }} </p>
 
     </form>
 

@@ -10,7 +10,7 @@ app = Flask(__name__)
 @app.route("/", methods=['GET', 'POST'])
 def root():
     data = None
-    if request.method == 'POST':
+    if request.method == "POST":
         print(request.get_data())
         data = request.get_data().decode("UTF-8")
         data = parse_qsl(data, keep_blank_values=True)
@@ -19,7 +19,6 @@ def root():
     else:
         pass
     return render_template("index.html", data=data)
-
 
 
 if __name__ == "__main__":

@@ -10,78 +10,161 @@
 
 {% block body %}
 
-<div class="topnav">
+<div class="topnav" style="height: 1000px;">
 
-  <form id="main-form" method="POST">
+    <form id="main-form" method="POST">
 
-    <table>
-        <tr>
-            <td>
-                <input type="text" id="word" name="word" placeholder="Word to search for">
-            </td>
-            <td>
-                <input type="text" id="sub" name="sub" placeholder="Optional: sub reddit">
-            </td> 
-        </tr>
-    </table>
+        <table>
+            <tr>
+                <td>
+                    <input type="text" id="word" name="word" placeholder="Word to search for">
+                </td>
+                <td>
+                    <input type="text" id="sub" name="sub" placeholder="Optional: sub reddit">
+                </td> 
+                <td>
+                                    
+                    <!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
+                    <div class="custom-select" style="width:200px;">
+                        <select id="start-month" name="start-name">
+                            <option selected value="unselected">Select month:</option>
+                            <option value="january">January</option>
+                            <option value="february">February</option>
+                            <option value="march">March</option>
+                            <option value="april">April</option>
+                            <option value="may">May</option>
+                            <option value="june">June</option>
+                            <option value="july">July</option>
+                            <option value="august">August</option>
+                            <option value="september">September</option>
+                            <option value="october">October</option>
+                            <option value="november">November</option>
+                            <option value="december">December</option>
+                        </select>
+                    </div>
+                    
+                    <script>
+                    var x, i, j, selElmnt, a, b, c;
+                    /*look for any elements with the class "custom-select":*/
+                    x = document.getElementsByClassName("custom-select");
+                    for (i = 0; i < x.length; i++) {
+                      selElmnt = x[i].getElementsByTagName("select")[0];
+                      /*for each element, create a new DIV that will act as the selected item:*/
+                      a = document.createElement("DIV");
+                      a.setAttribute("class", "select-selected");
+                      a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+                      x[i].appendChild(a);
+                      /*for each element, create a new DIV that will contain the option list:*/
+                      b = document.createElement("DIV");
+                      b.setAttribute("class", "select-items select-hide");
+                      for (j = 1; j < selElmnt.length; j++) {
+                        /*for each option in the original select element,
+                        create a new DIV that will act as an option item:*/
+                        c = document.createElement("DIV");
+                        c.innerHTML = selElmnt.options[j].innerHTML;
+                        c.addEventListener("click", function(e) {
+                            /*when an item is clicked, update the original select box,
+                            and the selected item:*/
+                            var y, i, k, s, h;
+                            s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+                            h = this.parentNode.previousSibling;
+                            for (i = 0; i < s.length; i++) {
+                              if (s.options[i].innerHTML == this.innerHTML) {
+                                s.selectedIndex = i;
+                                h.innerHTML = this.innerHTML;
+                                y = this.parentNode.getElementsByClassName("same-as-selected");
+                                for (k = 0; k < y.length; k++) {
+                                  y[k].removeAttribute("class");
+                                }
+                                this.setAttribute("class", "same-as-selected");
+                                break;
+                              }
+                            }
+                            h.click();
+                        });
+                        b.appendChild(c);
+                      }
+                      x[i].appendChild(b);
+                      a.addEventListener("click", function(e) {
+                          /*when the select box is clicked, close any other select boxes,
+                          and open/close the current select box:*/
+                          e.stopPropagation();
+                          closeAllSelect(this);
+                          this.nextSibling.classList.toggle("select-hide");
+                          this.classList.toggle("select-arrow-active");
+                        });
+                    }
+                    function closeAllSelect(elmnt) {
+                      /*a function that will close all select boxes in the document,
+                      except the current select box:*/
+                      var x, y, i, arrNo = [];
+                      x = document.getElementsByClassName("select-items");
+                      y = document.getElementsByClassName("select-selected");
+                      for (i = 0; i < y.length; i++) {
+                        if (elmnt == y[i]) {
+                          arrNo.push(i)
+                        } else {
+                          y[i].classList.remove("select-arrow-active");
+                        }
+                      }
+                      for (i = 0; i < x.length; i++) {
+                        if (arrNo.indexOf(i)) {
+                          x[i].classList.add("select-hide");
+                        }
+                      }
+                    }
+                    /*if the user clicks anywhere outside the select box,
+                    then close all select boxes:*/
+                    document.addEventListener("click", closeAllSelect);
+                    </script>
 
-    <label for="cars">Start Month:</label>
-    <!-- Input the range in time needed for the redit query -->
-    <select id="start-month">
-      <option selected value="january">January</option>
-      <option value="february">February</option>
-      <option value="march">March</option>
-      <option value="april">April</option>
-      <option value="may">May</option>
-      <option value="june">June</option>
-      <option value="july">July</option>
-      <option value="august">August</option>
-      <option value="september">September</option>
-      <option value="october">October</option>
-      <option value="november">November</option>
-      <option value="december">December</option>
-    </select>
 
-    <label for="end-month">End Month:</label>
-    <!-- Input the range in time needed for the redit query -->
-    <select id="end-month" form="main-form">
-      <option selected value="january">January</option>
-      <option value="february">February</option>
-      <option value="march">March</option>
-      <option value="april">April</option>
-      <option value="may">May</option>
-      <option value="june">June</option>
-      <option value="july">July</option>
-      <option value="august">August</option>
-      <option value="september">September</option>
-      <option value="october">October</option>
-      <option value="november">November</option>
-      <option value="december">December</option>
-    </select>
+                </td>
+            </tr>
+        </table>
+    
+        <label for="end-month">End Month:</label>
+        <select id="end-month" name="end-month" form="main-form">
+        <option selected value="january">January</option>
+        <option value="february">February</option>
+        <option value="march">March</option>
+        <option value="april">April</option>
+        <option value="may">May</option>
+        <option value="june">June</option>
+        <option value="july">July</option>
+        <option value="august">August</option>
+        <option value="september">September</option>
+        <option value="october">October</option>
+        <option value="november">November</option>
+        <option value="december">December</option>
+        </select>
 
+        <input type="submit" onclick="onSubmit()"></input>
+        <input type="reset">
 
-    <button onclick="myFunction()">Submit</button>
+        <p> {{ data }} </p>
 
-    <p id="demo"> {{ data }} </p>
-
-
-    <input type="reset">
-  </form>
-
-  <p id="notdemo"> "hi" </p>
-
-  <script>
-    function myFunction() {
-      var x = document.getElementById("subR").value;
-      var y = document.getElementById("start-month").value;
-      document.getElementById("demo").innerHTML = x;
-      document.getElementById("notdemo").innerText = "doooo";
-    }
-  </script>
-
-    <button onclick="myFunction()">button 2</button>
+    </form>
 
 
 </div>
+
+
+<script>
+
+function onSubmit() {
+    var form = document.getElementById("main-form");
+    var input = document.createElement("input");
+    input.setAttribute('name', 'test1');
+    input.setAttribute('type', 'hidden');
+    input.setAttribute('value', '444');
+    form.appendChild(input);
+    form.submit();
+}
+
+
+</script>
+
+
 
 {% endblock %}

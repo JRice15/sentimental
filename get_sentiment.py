@@ -9,4 +9,3 @@ def make_sentiment(comments: list):
         comment["sentiment"] = totalSentiment / len(blob.sentences)
     return comments
 
-

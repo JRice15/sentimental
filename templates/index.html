@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 {% endblock %}
 
@@ -11,25 +12,74 @@
 
 <div class="topnav">
 
-  <form method="POST" type="application/json">
-    <input type="text" id="subR" name="lkey" placeholder="Sub Reddit"><br><br>
-    <input type="text" id="sdfd" name="afdsd" placeholder="asdfg Reddit"><br><br>
+  <form id="main-form" method="POST">
 
-    <input type="submit" value="Submit">
+    <table>
+        <tr>
+            <td>
+                <input type="text" id="word" name="word" placeholder="Word to search for">
+            </td>
+            <td>
+                <input type="text" id="sub" name="sub" placeholder="Optional: sub reddit">
+            </td> 
+        </tr>
+    </table>
+
+    <label for="cars">Start Month:</label>
+    <!-- Input the range in time needed for the redit query -->
+    <select id="start-month">
+      <option selected value="january">January</option>
+      <option value="february">February</option>
+      <option value="march">March</option>
+      <option value="april">April</option>
+      <option value="may">May</option>
+      <option value="june">June</option>
+      <option value="july">July</option>
+      <option value="august">August</option>
+      <option value="september">September</option>
+      <option value="october">October</option>
+      <option value="november">November</option>
+      <option value="december">December</option>
+    </select>
+
+    <label for="end-month">End Month:</label>
+    <!-- Input the range in time needed for the redit query -->
+    <select id="end-month" form="main-form">
+      <option selected value="january">January</option>
+      <option value="february">February</option>
+      <option value="march">March</option>
+      <option value="april">April</option>
+      <option value="may">May</option>
+      <option value="june">June</option>
+      <option value="july">July</option>
+      <option value="august">August</option>
+      <option value="september">September</option>
+      <option value="october">October</option>
+      <option value="november">November</option>
+      <option value="december">December</option>
+    </select>
+
 
     <button onclick="myFunction()">Submit</button>
 
-    <p id="demo"></p>
+    <p id="demo"> {{ data }} </p>
 
-    <script>
-      function myFunction() {
-        var x = document.getElementById("subR").value;
-        document.getElementById("demo").innerHTML = x;
-      }
-    </script>
 
     <input type="reset">
   </form>
+
+  <p id="notdemo"> "hi" </p>
+
+  <script>
+    function myFunction() {
+      var x = document.getElementById("subR").value;
+      var y = document.getElementById("start-month").value;
+      document.getElementById("demo").innerHTML = x;
+      document.getElementById("notdemo").innerText = "doooo";
+    }
+  </script>
+
+    <button onclick="myFunction()">button 2</button>
 
 
 </div>

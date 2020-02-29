@@ -7,5 +7,6 @@ def make_sentiment(comments: list):
         for sentence in blob.sentences:
             totalSentiment += sentence.sentiment.polarity
         comment["sentiment"] = totalSentiment / len(blob.sentences)
+    return comments
 
 

@@ -15,6 +15,7 @@ from textblob import TextBlob
 import matplotlib.pyplot as plt
 
 import matplotlib.dates as mdate
+import datetime
 
 
 # Thank you Martin Thoma from stack overflow for this function
@@ -218,7 +219,6 @@ def plot_sentiments_over_time(queries, before, after, numBins = 30):
     """
     fig, ax = plt.subplots()
 
-    artists = []
 
     for query in queries:
 
@@ -237,9 +237,8 @@ def plot_sentiments_over_time(queries, before, after, numBins = 30):
             binEdges.append(mdate.epoch2num(edge)) # Change to num format for hist
 
         # Plot the date using plot_date rather than plot
-        line = ax.plot_date(binEdges, binValues,ls='-',marker="None")
+        ax.plot_date(binEdges, binValues,ls='-',marker="None")
 
-        artists.append(line)
 
     # Choose your xtick format string
     date_fmt = '%m-%d-%y'
@@ -261,4 +260,28 @@ def plot_sentiments_over_time(queries, before, after, numBins = 30):
     plt.legend(labels,loc='upper left')
 
     plt.savefig("result.svg")
-    plt.show()
+
+def convert_to_epoch(info):
+    """
+    Converts seperated timestamp info to epochs
+
+    Input:
+        - info: a dict with members of str:
+            - 'start-year'
+            - 'start-month'
+            - 'start-day'
+            - 'end-year'
+            - 'end-month'
+            - 'end-day'
+    
+    Return:
+        - dict with 'end' and 'start' epoch values
+    """
+    startEpoch = datetime.datetime(int(info["start-year"]), int(info["start-month"]),\
+        int(info["start-day"]), 0, 0).timestamp()
+    endEpoch = datetime.datetime(int(info["end-year"]), int(info["end-month"]),\
+        int(info["end-day"]), 0, 0).timestamp()
+
+    return {'start': startEpoch, 'end': endEpoch}
+
+    

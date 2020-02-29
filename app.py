@@ -3,6 +3,7 @@ from datetime import datetime
 import webbrowser
 from urllib.parse import parse_qsl
 import re
+import get_sentiment as gs
 
 app = Flask(__name__)
 
@@ -50,6 +51,26 @@ def root():
             Data.rm_row(post)
         else:
             Data.update(post)
+
+        # get the terms and subreddits
+        terms = []
+        subreddits = []
+        for key, value in post:
+            if value == "":
+                    value = None
+            if key[:3] == "sub":
+                subreddits.append(value)
+            if key[:4] == "word":
+                terms.append(value)
+        
+        queries = []
+        for x in range(len(terms)):
+            queries.append((terms[x],subreddits[x]))
+
+        times = gs.convert_to_epoch(post)
+
+        gs.plot_sentiments_over_time(queries, times["before"], times["after"])
+
 
     else:
         pass

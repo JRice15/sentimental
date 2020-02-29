@@ -6,6 +6,10 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+<audio autoplay>
+    <source src="/static/sound/1.mp3" type="audio/mpeg">
+</audio>
+
 {% endblock %}
 
 {% block body %}
@@ -80,6 +84,8 @@
                                 <option {{"selected" if (post['end_month'] == "12") else ""}} value="12">December</option>
                             </select>
                         </div>
+
+                        <p>{{"selected" if (post['end_month'] == "3") else "" }}</p>
                 
                     </td>
                         
@@ -128,7 +134,6 @@
 
     </form>
 
-
 </div>
 
 
@@ -144,8 +149,8 @@ function onSubmit(type) {
     // form.submit();
 }
 
-
 </script>
+
 
 <!-- custom select stuff -->
 <script>
@@ -221,7 +226,7 @@ function onSubmit(type) {
     /*if the user clicks anywhere outside the select box,
     then close all select boxes:*/
     document.addEventListener("click", closeAllSelect);
-    </script>
+</script>
 
 
 

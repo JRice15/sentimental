@@ -200,15 +200,16 @@ def get_simplified_sentiment_bins(term, before, after, subreddit = None, numBins
             totalEpoch += comment["created_utc"]
             totalSenti += comment["sentiment"]
         
-        averageEpoch = int(totalEpoch / len(sentiBin))
-        averageSenti = totalSenti / len(sentiBin)
+        if len(sentiBin) != 0:
+            averageEpoch = int(totalEpoch / len(sentiBin))
+            averageSenti = totalSenti / len(sentiBin)
 
-        simplifiedSentiments[0].append(averageEpoch)
-        simplifiedSentiments[1].append(averageSenti)
+            simplifiedSentiments[0].append(averageEpoch)
+            simplifiedSentiments[1].append(averageSenti)
 
     return simplifiedSentiments
 
-def plot_sentiments_over_time(queries, before, after, numBins = 30):
+def plot_sentiments_over_time(queries, before, after, numBins = 10):
     """
     Displays a histogram of queries' sentiment over time
 
@@ -282,6 +283,6 @@ def convert_to_epoch(info):
     endEpoch = datetime.datetime(int(info["end-year"]), int(info["end-month"]),\
         int(info["end-day"]), 0, 0).timestamp()
 
-    return {'start': startEpoch, 'end': endEpoch}
+    return {'start': int(startEpoch), 'end': int(endEpoch)}
 
     

@@ -37,6 +37,9 @@ class Data:
 
 
 def make_graph(post):
+    """
+    Make a sentiment graph from GUI info
+    """
     # get the terms and subreddits
     terms = []
     subreddits = []
@@ -54,7 +57,8 @@ def make_graph(post):
 
     times = gs.convert_to_epoch(post)
 
-    gs.plot_sentiments_over_time(queries, times["start"], times["end"])
+    print(queries,times)
+    gs.plot_sentiments_over_time(queries, times["end"], times["start"])
 
 
 

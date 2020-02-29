@@ -1,0 +1,59 @@
+#info {
+    width: 330px;
+    height: 30px;
+    background: #fff;
+}
+#bin0 {
+    width: 50px;
+    height: 300px;
+    background: #fff;
+}
+#bin1 {
+    width: 50px;
+    height: 300px;
+    background: #fff;
+}
+#bin2 {
+    width: 50px;
+    height: 300px;
+    background: #fff;
+}
+#bin3 {
+    width: 50px;
+    height: 300px;
+    background: #fff;
+}
+#bin4 {
+    width: 50px;
+    height: 300px;
+    background: #fff;
+}
+#bin5 {
+    width: 50px;
+    height: 300px;
+    background: #fff;
+}
+#bin6 {
+    width: 50px;
+    height: 300px;
+    background: #fff;
+}
+#bin7 {
+    width: 50px;
+    height: 300px;
+    background: #fff;
+}
+#bin8 {
+    width: 50px;
+    height: 300px;
+    background: #fff;
+}
+#bin9 {
+    width: 50px;
+    height: 300px;
+    background: #fff;
+}
+
+div.inline { float: left;
+             text-align: center }
+/*.clearBoth { clear:both; }*/

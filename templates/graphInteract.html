@@ -1,0 +1,54 @@
+<div id="info">
+</div>
+<div id="bin0" class="inline">
+</div>
+<div id="bin1" class="inline">
+</div>
+<div id="bin2" class="inline">
+</div>
+<div id="bin3" class="inline">
+</div>
+<div id="bin4" class="inline">
+</div>
+<div id="bin5" class="inline">
+</div>
+<div id="bin6" class="inline">
+</div>
+<div id="bin7" class="inline">
+</div>
+<div id="bin8" class="inline">
+</div>
+<div id="bin9" class="inline">
+</div>
+<!--<br class="clearBoth" />-->
+
+<script>
+
+setInterval(function(){
+    var $binStartTime = 0;
+    var $binEndTime = 0;
+    var $info = $("#info");
+    var $bin0 = $("#bin0");
+    var $bin1 = $("#bin1");
+    var $bin2 = $("#bin2");
+    var $bin3 = $("#bin3");
+    var $bin4 = $("#bin4");
+    var $bin5 = $("#bin5");
+    var $bin6 = $("#bin6");
+    var $bin7 = $("#bin7");
+    var $bin8 = $("#bin8");
+    var $bin9 = $("#bin9");
+    var $binList = [$bin0, $bin1, $bin2, $bin3, $bin4, $bin5, $bin6, $bin7, $bin8, $bin9];
+    
+    for (i = 0; i < $binList.length; i++){    
+       if($binList[i].is(":hover")) {
+          $binList[i].css("background", "lightblue");
+          $info.html("Over sample " + i + ".");
+       }
+       else {
+          $binList[i].css("background", "");
+       }
+    }
+}, 100);
+
+</script>

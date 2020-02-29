@@ -1,22 +1,19 @@
 from flask import Flask, render_template, request, redirect
 from datetime import datetime
-from flask_sqlalchemy import SQLAlchemy
 import webbrowser
 
 app = Flask(__name__)
 
 
 
-
-
 @app.route("/", methods=['GET', 'POST'])
 def root():
     if request.method == 'POST':
-        pass
+        print(request.get_data())
+        print(request.get_json())
     else:
         pass
-    obj = BasicObj("test1")
-    return render_template("index.html", obj=obj)
+    return render_template("index.html")
 
 
 

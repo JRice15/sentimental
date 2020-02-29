@@ -1,20 +1,37 @@
 {% extends 'base.html' %}
 
 {% block head %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 {% endblock %}
 
 {% block body %}
 
+<div class="topnav">
 
-    <div class="topnav">
-      <input type="text" id="lkey" name="lkey"><br><br>
-      <input type="submit" value="Submit">
-      <input type="reset">
-    </div>
+  <form method="POST" type="application/json">
+    <input type="text" id="subR" name="lkey" placeholder="Sub Reddit"><br><br>
+    <input type="text" id="sdfd" name="afdsd" placeholder="asdfg Reddit"><br><br>
 
+    <input type="submit" value="Submit">
+
+    <button onclick="myFunction()">Submit</button>
+
+    <p id="demo"></p>
+
+    <script>
+      function myFunction() {
+        var x = document.getElementById("subR").value;
+        document.getElementById("demo").innerHTML = x;
+      }
+    </script>
+
+    <input type="reset">
+  </form>
+
+
+</div>
 
 {% endblock %}

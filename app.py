@@ -11,6 +11,26 @@ class Data:
     post = {}
     row_count = 1
 
+    @staticmethod
+    def add_row(post):
+        Data.post = post
+        Data.row_count += 1
+
+    @staticmethod
+    def rm_row(post):
+        Data.post = post
+        Data.row_count = 1 if Data.row_count < 2 else Data.row_count - 1
+
+    @staticmethod
+    def clear(post):
+        Data.row_count = 1
+        Data.post = {}
+
+    @staticmethod
+    def update(post):
+        Data.post = post
+
+
 
 @app.route("/", methods=['GET', 'POST'])
 def root():
@@ -20,14 +40,13 @@ def root():
         post = {k:v for k,v in post}
 
         if post["submit-type"] == "clear":
-            Data.row_count = 1
-            Data.post = {}
+            Data.clear(post)
         elif post["submit-type"] == "add-row":
-            Data.post = post
-            Data.row_count += 1
+            Data.add_row(post)
         elif post["submit-type"] == "rm-row":
-            Data.post = post
-            Data.row_count = 1 if Data.row_count < 2 else Data.row_count - 1
+            Data.rm_row(post)
+        else:
+            Data.update(post)
 
     else:
         pass

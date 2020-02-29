@@ -1,0 +1,68 @@
+<div id="info">
+</div>
+<div id="bin0" class="inline">
+</div>
+<div id="bin1" class="inline">
+</div>
+<div id="bin2" class="inline">
+</div>
+<div id="bin3" class="inline">
+</div>
+<div id="bin4" class="inline">
+</div>
+<div id="bin5" class="inline">
+</div>
+<div id="bin6" class="inline">
+</div>
+<div id="bin7" class="inline">
+</div>
+<div id="bin8" class="inline">
+</div>
+<div id="bin9" class="inline">
+</div>
+<!--<br class="clearBoth" />-->
+
+<script>
+
+setInterval(function(){function create_bin_list(num_bins, start, end){
+    var bin_list = [];
+    var text = "<div id=\"info\"> </div>";
+    var interval = (end - start) / num_bins;
+    for (i = 0; i < num_bins; i++){
+       /*text += "<div id=\"bin" + i + "\" class=\"inline bin\"></div>";*/
+       bin_list.append($("#bin" + i));
+    }
+    /*alert(text);*/
+    return bin_list;
+}
+
+setInterval(function(){
+
+    var bin_start_time = 0;
+    var bin_end_time = 0;
+    var bin_list = create_bin_list(10, 0, 10000);
+    var info = $("#info");
+    /*var bin0 = $("#bin0");
+    var bin1 = $("#bin1");
+    var bin2 = $("#bin2");
+    var bin3 = $("#bin3");
+    var bin4 = $("#bin4");
+    var bin5 = $("#bin5");
+    var bin6 = $("#bin6");
+    var bin7 = $("#bin7");
+    var bin8 = $("#bin8");
+    var bin9 = $("#bin9");
+    var binList = [bin0, bin1, bin2, bin3, bin4, bin5, bin6, bin7, bin8, bin9];*/
+    
+    for (i = 0; i < bin_list.length; i++){    
+       if (bin_list[i].is(":hover")) {
+          bin_list[i].css("background", "lightblue");
+          info.html("Over sample " + i + ".\nStart: " + bin_start_time + "\nEnd: " + bin_end_time);
+       }
+       else {
+          bin_list[i].css("background", "");
+       }
+    }
+}, 1);
+
+</script>

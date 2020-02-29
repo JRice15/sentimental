@@ -36,6 +36,28 @@ class Data:
 
 
 
+def make_graph(post):
+    # get the terms and subreddits
+    terms = []
+    subreddits = []
+    for key, value in post.items():
+        if value == "":
+            value = None
+        if key[:3] == "sub":
+            subreddits.append(value)
+        if key[:4] == "word":
+            terms.append(value)
+    
+    queries = []
+    for x in range(len(terms)):
+        queries.append((terms[x],subreddits[x]))
+
+    times = gs.convert_to_epoch(post)
+
+    gs.plot_sentiments_over_time(queries, times["start"], times["end"])
+
+
+
 @app.route("/", methods=['GET', 'POST'])
 def root():
     if request.method == "POST":
@@ -52,25 +74,7 @@ def root():
         else:
             Data.update(post)
 
-        # get the terms and subreddits
-        terms = []
-        subreddits = []
-        for key, value in post:
-            if value == "":
-                    value = None
-            if key[:3] == "sub":
-                subreddits.append(value)
-            if key[:4] == "word":
-                terms.append(value)
-        
-        queries = []
-        for x in range(len(terms)):
-            queries.append((terms[x],subreddits[x]))
-
-        times = gs.convert_to_epoch(post)
-
-        gs.plot_sentiments_over_time(queries, times["before"], times["after"])
-
+        make_graph(post)
 
     else:
         pass

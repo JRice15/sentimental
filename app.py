@@ -18,8 +18,11 @@ class Data:
 
     @staticmethod
     def rm_row(post):
+        if Data.row_count > 1:
+            Data.row_count -= 1
+            del [post["word{0}".format(Data.row_count)]]
+            del [post["sub{0}".format(Data.row_count)]]
         Data.post = post
-        Data.row_count = 1 if Data.row_count < 2 else Data.row_count - 1
 
     @staticmethod
     def clear(post):

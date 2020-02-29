@@ -1,9 +1,18 @@
 /* Add a black background color to the top navigation bar */
 
+.blue {
+  background-color: #a4e5e7;
+  width: 100%;
+}
+
+.graph-box {
+  align-content: center;
+  padding: 10px;
+  width: 100%;
+}
 
 .topnav {
     overflow: hidden;
-    background-color: #a4e5e7;
   }
   
 /* Style the links inside the navigation bar */

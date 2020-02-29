@@ -3,7 +3,7 @@
 
 .topnav {
     overflow: hidden;
-    background-color: #fc0000;
+    background-color: #a4e5e7;
   }
   
 /* Style the links inside the navigation bar */
@@ -39,9 +39,6 @@
   font-size: 17px;
 }
 
-select .custom-select {
-  margin-top: 8px;
-}
 
 /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
 @media screen and (max-width: 600px) {
@@ -70,7 +67,7 @@ select .custom-select {
 }
 
 .select-selected {
-  background-color: DodgerBlue;
+  background-color: white;
 }
 
 /*style the arrow inside the select element:*/
@@ -82,18 +79,18 @@ select .custom-select {
   width: 0;
   height: 0;
   border: 6px solid transparent;
-  border-color: #fff transparent transparent transparent;
+  border-color: rgb(0, 0, 0) transparent transparent transparent;
 }
 
 /*point the arrow upwards when the select box is open (active):*/
 .select-selected.select-arrow-active:after {
-  border-color: transparent transparent #fff transparent;
+  border-color: transparent transparent rgb(0, 0, 0) transparent;
   top: 7px;
 }
 
 /*style the items (options), including the selected item:*/
 .select-items div,.select-selected {
-  color: #ffffff;
+  color: black;
   padding: 8px 16px;
   border: 1px solid transparent;
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
@@ -104,7 +101,7 @@ select .custom-select {
 /*style items (options):*/
 .select-items {
   position: absolute;
-  background-color: DodgerBlue;
+  background-color: white;
   top: 100%;
   left: 0;
   right: 0;

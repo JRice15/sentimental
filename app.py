@@ -6,6 +6,7 @@ import re
 import get_sentiment as gs
 
 app = Flask(__name__)
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 1
 
 class Data:
 
@@ -84,6 +85,14 @@ def root():
         pass
 
     return render_template("index.html", post=Data.post, row_count=Data.row_count)
+
+
+@app.after_request
+def add_header(response):
+    # response.cache_control.no_store = True
+    if 'Cache-Control' not in response.headers:
+        response.headers['Cache-Control'] = 'no-store'
+    return response
 
 
 if __name__ == "__main__":

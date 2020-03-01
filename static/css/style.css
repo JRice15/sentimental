@@ -12,7 +12,7 @@ body {
 .graph-box {
   position: absolute;
   left: 470px;
-  top: 93px;
+  top: 193px;
   width: 100%;
 }
 
@@ -25,7 +25,14 @@ button[type=submit] {
   padding-bottom: 9px;
   margin-top: 8px;
   background-color: white;
+  border-color: rgb(172, 172, 172);
+  border-radius: 3px;
 }
+
+button[type=submit]:hover {
+  background-color: rgb(221, 221, 221);
+}
+
 
 .topnav {
     overflow: hidden;
@@ -147,9 +154,10 @@ button[type=submit] {
 
 /*Information displayed when mouse is hovering over the graph*/
 #info {
-    width: 330px;
-    height: 30px;
+    padding-left: 10px;
     background: #fff;
+    position: absolute; 
+    top: 405px; 
 }
 
 /*Segments of the graph that can be hovered over*/
@@ -162,7 +170,7 @@ button[type=submit] {
 }
 
 .bin:hover {
-  opacity: 0.2;
+  opacity: 0.12;
 }
 
 .binholder {

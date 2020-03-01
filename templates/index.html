@@ -25,10 +25,12 @@
                 <button style="position: absolute; left: -100000px;" tabindex="1" id="render" type="submit" name="render" onclick="onSubmit('render')">yuh</button>
 
                 <tr>
-                    <td>
-                        <p>Date Range:</p>
-
+                    <td colspan="10">
+                        <h2 style="padding: 5px;">Reddit Sentiment Analysis</h2>
                     </td>
+                </tr>
+                <tr >
+
                     <!-- START DATE -->
                     <td>            
                         <!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
@@ -142,36 +144,40 @@
 
 
     <div class="graph-box">
+        {% if 'bins' in post %}
         <div id="binholder" class="binholder">
-            <div id="bin0" class="bin" data-min="0" data-max="48" name="1" style="left:0px;">
+            <div id="bin0" class="bin" data-min="{{post['bins'][0]}}" data-max="{{post['bins'][1]}}" data-id="1" style="left:0px;">
             </div>
-            <div id="bin1" class="bin" data-min="48" data-max="48" name="1" style="left: 48;">
+            <div id="bin1" class="bin" data-min="{{post['bins'][1]}}" data-max="{{post['bins'][2]}}" data-id="2" style="left: 48;">
             </div>
-            <div id="bin2" class="bin" data-min="96" data-max="48" name="1" style="left: 96;">
+            <div id="bin2" class="bin" data-min="{{post['bins'][2]}}" data-max="{{post['bins'][3]}}" data-id="3" style="left: 96;">
             </div>
-            <div id="bin3" class="bin" data-min="144" data-max="48" name="1" style="left: 144;">
+            <div id="bin3" class="bin" data-min="{{post['bins'][3]}}" data-max="{{post['bins'][4]}}" data-id="4" style="left: 144;">
             </div>
-            <div id="bin4" class="bin" data-min="192" data-max="48" name="1" style="left: 192; width: 46px;">
+            <div id="bin4" class="bin" data-min="{{post['bins'][4]}}" data-max="{{post['bins'][5]}}" data-id="5" style="left: 192; width: 46px;">
             </div>
-            <div id="bin5" class="bin" data-min="0" data-max="48" name="1" style="left: 240; width: 46px">
+            <div id="bin5" class="bin" data-min="{{post['bins'][5]}}" data-max="{{post['bins'][6]}}" data-id="6" style="left: 240; width: 46px">
             </div>
-            <div id="bin6" class="bin" data-min="0" data-max="48" name="1" style="left: 288;">
+            <div id="bin6" class="bin" data-min="{{post['bins'][6]}}" data-max="{{post['bins'][7]}}" data-id="7" style="left: 288;">
             </div>
-            <div id="bin7" class="bin" data-min="0" data-max="48" name="1" style="left: 336;">
+            <div id="bin7" class="bin" data-min="{{post['bins'][7]}}" data-max="{{post['bins'][8]}}" data-id="8" style="left: 336;">
             </div>
-            <div id="bin8" class="bin" data-min="0" data-max="48" name="1" style="left: 384;">
+            <div id="bin8" class="bin" data-min="{{post['bins'][8]}}" data-max="{{post['bins'][9]}}" data-id="9" style="left: 384;">
             </div>
-            <div id="bin9" class="bin" data-min="0" data-max="48" name="1" style="left: 420;">
+            <div id="bin9" class="bin" data-min="{{post['bins'][9]}}" data-max="{{post['bins'][10]}}" data-id="10" style="left: 420;">
             </div>
         </div>
+        {% endif %}
         <object class="graph" type="image/svg+xml" data="result.svg">
             <!-- Your fall back here -->
             <img src="{{ url_for('download_file', filename='result.svg') }}" />
         </object>
-        <p id="info" class="info" style="position: absolute; top: 500px; z-index: 46;">Hello</p>
+        <p id="info" class="info"></p>
     </div>
         
 </div>
+
+
 
 
 <script>
@@ -272,9 +278,19 @@ function onSubmit(type) {
 var info = document.getElementById("info");
 var binh = document.getElementById("binholder");
 
-
 binh.addEventListener("mouseover", function(event) {
-    info.innerText = "Over sample " + event.target.name + ".\nStart: " + event.target.dataset.min + "\nEnd: " + event.target.dataset.max;
+    info.innerHTML = "Sample " + event.target.dataset.id + ": " + event.target.dataset.min + " to " + event.target.dataset.max +
+        "<br><a href='google.com'>link</a>";
+})
+
+binh.addEventListener("click", function(event) {
+
+    var start_date = event.target.dataset.min.split("-");
+    var end_date = event.target.dataset.max.split("-");
+    var link = "https://www.google.com/search?q=" + query + "&safe=strict&source=lnt&tbs=cdr%3A1%2Ccd_min%3A" + start_date[0] + "%2F" + 
+        start_date[1] + "%2F" + start_date[2] + "%2Ccd_max%3A" + end_date[0] + "%2F" + end_date[1] + "%2F" + 
+        end_date[2] + "&tbm=";
+    window.open(link, "_blank");
 })
 
 

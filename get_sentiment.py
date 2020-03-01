@@ -17,6 +17,8 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdate
 import datetime
 
+from data import Data
+
 
 # Thank you Martin Thoma from stack overflow for this function
 def get_jsonparsed_data(url):
@@ -146,7 +148,10 @@ def get_binned_sentiment_comments(term, before, after, subreddit = None, numBins
     bins = []
     binLength = (after - before) / numBins
     for i in range(0, numBins):
-        thisBin = get_sentiment_comments(term, before + binLength * i, before - 1 + binLength * (i + 1), subreddit)
+        bin_start = before - 1 + binLength * (i + 1)
+        bin_end = before + binLength * i
+        Data.set_bins( convert_to_date([bin_start, bin_end]) )
+        thisBin = get_sentiment_comments(term, bin_start, bin_end, subreddit)
         
         # add sentiment values
         make_sentiment(thisBin)
@@ -186,8 +191,9 @@ def get_simplified_sentiment_bins(term, before, after, subreddit = None, numBins
         - formated for easy plotting
         - epochdates and sentiments are the average value from their bin
     """
+    Data.bins = []
     sentiBins = get_binned_sentiment_comments(term, before, after,\
-    subreddit = subreddit, numBins = numBins)
+        subreddit=subreddit, numBins=numBins)
 
     simplifiedSentiments = ([],[])
 
@@ -328,4 +334,11 @@ def convert_to_epoch(info):
 
     return {'start': int(startEpoch), 'end': int(endEpoch)}
 
-    
+
+def convert_to_date(timestamp_list):
+    """
+    convert list of timestamps to list of date strings
+    """
+    return [datetime.datetime.fromtimestamp(i).strftime("%m-%d-%Y") for i in timestamp_list]
+
+

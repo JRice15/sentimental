@@ -5,36 +5,10 @@ from urllib.parse import parse_qsl
 import re
 import get_sentiment as gs
 import os
+from data import Data
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 1
-
-class Data:
-
-    post = {}
-    row_count = 1
-
-    @staticmethod
-    def add_row(post):
-        Data.post = post
-        Data.row_count += 1
-
-    @staticmethod
-    def rm_row(post):
-        if Data.row_count > 1:
-            Data.row_count -= 1
-            del [post["word{0}".format(Data.row_count)]]
-            del [post["sub{0}".format(Data.row_count)]]
-        Data.post = post
-
-    @staticmethod
-    def clear(post):
-        Data.row_count = 1
-        Data.post = {}
-
-    @staticmethod
-    def update(post):
-        Data.post = post
 
 
 
@@ -59,7 +33,6 @@ def make_graph(post):
 
     times = gs.convert_to_epoch(post)
 
-    print(queries,times)
     gs.plot_sentiments_over_time(queries, times["end"], times["start"])
 
 
@@ -82,6 +55,8 @@ def root():
             make_graph(post)
         else:
             Data.update(post)
+
+        Data.post["bins"] = Data.bins
 
     else:
         pass

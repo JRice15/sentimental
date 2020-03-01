@@ -127,6 +127,21 @@
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+/*Information displayed when mouse is hovering over the graph*/
+#info {
+    width: 330px;
+    height: 30px;
+    background: #fff;
+}
+
+/*Segments of the graph that can be hovered over*/
+.bin {
+    float: left;
+    width: 50px;
+    height: 300px;
+    background: #fff;
+}
+
 
 
 

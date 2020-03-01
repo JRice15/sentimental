@@ -11,8 +11,8 @@ body {
 
 .graph-box {
   position: absolute;
-  left: 470px;
-  top: 193px;
+  left: 485px;
+  top: 180px;
   width: 100%;
 }
 
@@ -157,7 +157,7 @@ button[type=submit]:hover {
     padding-left: 10px;
     background: #fff;
     position: absolute; 
-    top: 405px; 
+    top: 417px; 
 }
 
 /*Segments of the graph that can be hovered over*/
@@ -166,7 +166,7 @@ button[type=submit]:hover {
     width: 48px;
     height: 312px;
     background: rgb(30, 241, 248);
-    opacity: 0
+    opacity: 0;
 }
 
 .bin:hover {

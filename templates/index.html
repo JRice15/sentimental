@@ -279,8 +279,7 @@ var info = document.getElementById("info");
 var binh = document.getElementById("binholder");
 
 binh.addEventListener("mouseover", function(event) {
-    info.innerHTML = "Sample " + event.target.dataset.id + ": " + event.target.dataset.min + " to " + event.target.dataset.max +
-        "<br><a href='google.com'>link</a>";
+    info.innerHTML = "Sample " + event.target.dataset.id + ": " + event.target.dataset.min + " to " + event.target.dataset.max;
 })
 
 binh.addEventListener("click", function(event) {

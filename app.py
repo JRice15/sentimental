@@ -60,6 +60,7 @@ def root():
         while (i < len(Data.bins) - 1):
             if Data.bins[i] == Data.bins[i+1]:
                 Data.bins.pop(i)
+            i += 1
         Data.post["bins"] = Data.bins
 
 

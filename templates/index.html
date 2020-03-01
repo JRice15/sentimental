@@ -142,34 +142,33 @@
 
 
     <div class="graph-box">
-        <div id="info" class="info">
-        </div>
-        <div style="top: 80px; left: 120px;">
-            <div id="bin0" class="bin" style="left: 0;">
-            </bin>
-            <div id="bin1" class="bin" style="left: 48;">
-            </bin>
-            <div id="bin2" class="bin" style="left: 96;">
-            </bin>
-            <div id="bin3" class="bin" style="left: 144;">
-            </bin>
-            <div id="bin4" class="bin" style="left: 192;">
-            </bin>
-            <div id="bin5" class="bin" style="left: 240;">
-            </bin>
-            <div id="bin6" class="bin" style="left: 288;">
-            </bin>
-            <div id="bin7" class="bin" style="left: 336;">
-            </bin>
-            <div id="bin8" class="bin" style="left: 384;">
-            </bin>
-            <div id="bin9" class="bin" style="left: 432;">
-            </bin>
+        <div id="binholder" style="position: absolute; top: 86px; left: 72px; z-index: 45;">
+            <div id="bin0" class="bin" data-min="0" data-max="48" name="1" style="left: 0;">
+            </div>
+            <div id="bin1" class="bin" data-min="48" data-max="48" name="1" style="left: 48;">
+            </div>
+            <div id="bin2" class="bin" data-min="96" data-max="48" name="1" style="left: 96;">
+            </div>
+            <div id="bin3" class="bin" data-min="144" data-max="48" name="1" style="left: 144;">
+            </div>
+            <div id="bin4" class="bin" data-min="192" data-max="48" name="1" style="left: 192;">
+            </div>
+            <div id="bin5" class="bin" data-min="0" data-max="48" name="1" style="left: 240;">
+            </div>
+            <div id="bin6" class="bin" data-min="0" data-max="48" name="1" style="left: 288;">
+            </div>
+            <div id="bin7" class="bin" data-min="0" data-max="48" name="1" style="left: 336;">
+            </div>
+            <div id="bin8" class="bin" data-min="0" data-max="48" name="1" style="left: 384;">
+            </div>
+            <div id="bin9" class="bin" data-min="0" data-max="48" name="1" style="left: 432;">
+            </div>
         </div>
         <object class="graph" type="image/svg+xml" data="result.svg">
             <!-- Your fall back here -->
             <img src="{{ url_for('download_file', filename='result.svg') }}" />
         </object>
+        <p id="info" class="info" style="position: absolute; top: 500px; z-index: 46;">Hello</p>
     </div>
         
 </div>
@@ -269,33 +268,17 @@ function onSubmit(type) {
 
 <script>
 
-setInterval(function(){
 
-    var bin_start_time = 0;
-    var bin_end_time = 0;
-    var info = $("#info");
-    var bin0 = $("#bin0");
-    var bin1 = $("#bin1");
-    var bin2 = $("#bin2");
-    var bin3 = $("#bin3");
-    var bin4 = $("#bin4");
-    var bin5 = $("#bin5");
-    var bin6 = $("#bin6");
-    var bin7 = $("#bin7");
-    var bin8 = $("#bin8");
-    var bin9 = $("#bin9");
-    var binList = [bin0, bin1, bin2, bin3, bin4, bin5, bin6, bin7, bin8, bin9];
-    
-    for (i = 0; i < bin_list.length; i++){    
-       if (bin_list[i].is(":hover")) {
-          bin_list[i].css("background", "lightblue");
-          info.html("Over sample " + i + ".\nStart: " + bin_start_time + "\nEnd: " + bin_end_time);
-       }
-       else {
-          bin_list[i].css("background", "");
-       }
-    }
-}, 1);
+var info = document.getElementById("info");
+var binh = document.getElementById("binholder");
+
+
+binh.addEventListener("mouseover", function(event) {
+    info.innerText = "Over sample " + event.target.name + ".\nStart: " + event.target.dataset.min + "\nEnd: " + event.target.dataset.max;
+})
+
+
+
 
 </script>
 

@@ -16,6 +16,10 @@ body {
   width: 100%;
 }
 
+.graph {
+  position: absolute;
+}
+
 button[type=submit] {
   padding: 8px;
   padding-bottom: 9px;
@@ -153,9 +157,13 @@ button[type=submit] {
     float: left;
     width: 48px;
     height: 313px;
-    background: #fff;
+    background: rgb(30, 241, 248);
+    opacity: 0
 }
 
+.bin:hover {
+  opacity: 0.5;
+}
 
 
 

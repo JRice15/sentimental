@@ -11,8 +11,9 @@ import json
 import re
 
 from textblob import TextBlob
-
+import matplotlib
 import matplotlib.pyplot as plt
+matplotlib.use('Agg')
 
 import matplotlib.dates as mdate
 import datetime

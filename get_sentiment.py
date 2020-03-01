@@ -216,7 +216,7 @@ def get_simplified_sentiment_bins(term, before, after, subreddit = None, numBins
 
     return simplifiedSentiments
 
-def plot_sentiments_over_time(queries, before, after, numBins = 10):
+def plot_sentiments_over_time(queries, before, after, q, numBins = 10):
     """
     Displays a histogram of queries' sentiment over time
 
@@ -224,6 +224,7 @@ def plot_sentiments_over_time(queries, before, after, numBins = 10):
         - queries: [(term, subreddit),...]
         - before: int epoch value
         - after: int epoch value
+        - q: multiprocess Queue
     """
     fig, ax = plt.subplots()
 
@@ -231,7 +232,12 @@ def plot_sentiments_over_time(queries, before, after, numBins = 10):
     allTimeValues = []
     allBinValues = []
 
+    Data.q = q
+
     for query in queries:
+        term = "all" if query[0] is None else "'" + query[0] + "'"
+        sub = "all" if query[1] is None else "'" + query[1] + "'"
+        q.put(term + " from " + sub)
 
         # Get histogram data for query
         sentiBins = get_simplified_sentiment_bins(query[0], before, after, subreddit = query[1], numBins = numBins)
@@ -290,6 +296,8 @@ def plot_sentiments_over_time(queries, before, after, numBins = 10):
     plt.legend(labels,loc='upper left')
 
     plt.savefig("result.svg")
+
+    q.put("_done")
 
 def average_lol(lol):
     """

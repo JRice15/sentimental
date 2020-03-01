@@ -4,6 +4,10 @@ class Data:
     post = {}
     row_count = 1
     bins = []
+    complete_queries = 0
+    num_queries = 0
+    q = None
+    p = None
 
     @staticmethod
     def add_row(post):
@@ -26,8 +30,8 @@ class Data:
 
     @staticmethod
     def update(post):
-        Data.bins = []
         Data.post = post
+
 
     @staticmethod
     def add_bins(bins):

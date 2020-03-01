@@ -136,11 +136,18 @@
                     </td>
                 </tr>
             </table>
+
+            {% if rendering %}
+                <p id="output">Processing queries</p>
+            {% endif %}
+
+
         </div>
         
     </form>
 
     </div>
+
 
 
     <div class="graph-box">
@@ -272,8 +279,9 @@ function onSubmit(type) {
 </script>
 
 
-<script>
 
+
+<script>
 
 var info = document.getElementById("info");
 var binh = document.getElementById("binholder");
@@ -293,9 +301,33 @@ binh.addEventListener("click", function(event) {
 })
 
 
-
-
 </script>
+
+
+{% if rendering %}
+<script>
+    $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+
+    $(function() {
+        setInterval(function() {
+        $.getJSON($SCRIPT_ROOT + '/_check_render', {}, function(data) {
+            console.log(data)
+            if (data[0] == true) {
+                if (data[3] == "_done") {
+                    document.getElementById("output").innerText = "Processing and rendering complete";
+                    document.getElementById("main-form").submit();
+                } else {
+                    document.getElementById("output").innerHTML = "Processing query " + data[1] + " of " + data[2] + ":<br>" + data[3];
+                }
+            } else {
+                document.getElementById("output").innerText += ".";
+            }
+        });
+        return false;
+      }, 1000);
+    });
+</script>
+{% endif %}
 
 
 

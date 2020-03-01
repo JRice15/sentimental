@@ -180,5 +180,14 @@ button[type=submit]:hover {
     z-index: 45;
 }
 
-
+#output {
+  padding: 5px;
+  position: absolute;
+  top: 0;
+  left: 640px;
+  background-color: #b7ebec;
+  color: rgb(88, 88, 88);
+  width: 449px;
+  height: 36px;
+}
 

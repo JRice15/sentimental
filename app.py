@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, config, send_from_directory
+from flask import Flask, render_template, request, redirect, config, send_from_directory, jsonify
 from datetime import datetime
 import webbrowser
 from urllib.parse import parse_qsl
@@ -7,13 +7,17 @@ import get_sentiment as gs
 import os
 from data import Data
 from collections import OrderedDict
+import time
+
+import queue
+from multiprocessing import Queue, Process, get_context
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 1
 
 
 
-def make_graph(post):
+def make_graph(post, q):
     """
     Make a sentiment graph from GUI info
     """
@@ -34,17 +38,60 @@ def make_graph(post):
 
     times = gs.convert_to_epoch(post)
 
-    gs.plot_sentiments_over_time(queries, times["end"], times["start"])
+    gs.plot_sentiments_over_time(queries, times["end"], times["start"], q)
 
+
+
+@app.route('/_check_render')
+def check_render():
+    print("check render")
+    try:
+        item = Data.q.get(False)
+        Data.complete_queries += 1
+        if item == "_done":
+            Data.p.join()
+            Data.p.terminate()
+            Data.bins = list(OrderedDict.fromkeys(Data.bins))
+        print(" ", item)
+        return jsonify(True, Data.complete_queries, Data.num_queries, item)
+    except queue.Empty:
+        print("  no result")
+        return jsonify(False, Data.complete_queries, Data.num_queries)
+
+
+def render(post):
+    Data.update(post)
+    Data.complete_queries = 0
+    ctx = get_context('spawn')
+    Data.q = ctx.Queue()
+    Data.p = ctx.Process(target=make_graph, args=(post, Data.q))
+    Data.p.start()
 
 
 @app.route("/", methods=['GET', 'POST'])
 def root():
+    rendering = False
+
     if request.method == "POST":
         post = request.get_data().decode("UTF-8")
         post = parse_qsl(post, keep_blank_values=True)
         post = {k:v for k,v in post}
 
+        Data.num_queries = 0
+        i = 0
+        while ("word" + str(i) in post) or ("sub" + str(i) in post):
+            Data.num_queries += 1
+            i += 1
+
+        if (Data.p is not None):
+            if (Data.p.is_alive):
+                print("killing")
+                try:
+                    Data.p.terminate()
+                except Exception as e:
+                    print(e)
+        if "submit-type" not in post:
+            post["submit-type"] = "update"
         if post["submit-type"] == "clear":
             Data.clear(post)
         elif post["submit-type"] == "add-row":
@@ -52,19 +99,19 @@ def root():
         elif post["submit-type"] == "rm-row":
             Data.rm_row(post)
         elif post["submit-type"] == "render":
-            Data.update(post)
-            make_graph(post)
-            Data.bins = list(OrderedDict.fromkeys(Data.bins))
+            rendering = True
+            render(post)
         else:
             Data.update(post)
+    
 
         Data.post["bins"] = Data.bins
 
 
-    else:
-        pass
+    return render_template("index.html", 
+        post=Data.post, row_count=Data.row_count, request=request, 
+        rendering=rendering)
 
-    return render_template("index.html", post=Data.post, row_count=Data.row_count)
 
 
 @app.after_request

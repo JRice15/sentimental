@@ -220,6 +220,9 @@ def plot_sentiments_over_time(queries, before, after, numBins = 10):
     """
     fig, ax = plt.subplots()
 
+    # initialize objects for average
+    allTimeValues = []
+    allBinValues = []
 
     for query in queries:
 
@@ -240,6 +243,15 @@ def plot_sentiments_over_time(queries, before, after, numBins = 10):
         # Plot the date using plot_date rather than plot
         ax.plot_date(binEdges, binValues,ls='-',marker="None")
 
+        allTimeValues.append(binEdges)
+        allBinValues.append(binValues)
+
+    # make average line if aplicable 
+    if len(queries) > 1:
+        avEdges = average_lol(allTimeValues)
+        avValues = average_lol(allBinValues)
+        ax.plot_date(avEdges, avValues,ls='--',marker="None")
+
 
     # Choose your xtick format string
     date_fmt = '%m-%d-%y'
@@ -257,10 +269,41 @@ def plot_sentiments_over_time(queries, before, after, numBins = 10):
     plt.title('Sentiment over time')
 
     # Legend
-    labels = [str(query[0]) + ", " + str(query[1]) for query in queries]
+    # deal with empty fields
+    labelQueries = []
+    for query in queries:
+        newQuery = [query[0],query[1]] # make it not a tuple
+        if query[0] == None:
+            newQuery[0] = "all comments"
+        if query[1] == None:
+            newQuery[1] = "all subreddits"
+        labelQueries.append(newQuery)
+    labels = [query[0] + ", " + query[1] for query in labelQueries] + ["average"]
+
     plt.legend(labels,loc='upper left')
 
     plt.savefig("result.svg")
+
+def average_lol(lol):
+    """
+    given a list of equally sized lists
+    return the average value of the inner lists
+    """
+    totals = []
+
+    # for every item in every bin add it to totals
+    for i in range(len(lol[0])):
+        totals.append(0)
+        for l in lol:
+            totals[i] += l[i]
+
+    # Calc average
+    av = []
+    for val in totals:
+        if len(lol) > 0:
+            av.append(val/len(lol))
+
+    return av
 
 def convert_to_epoch(info):
     """

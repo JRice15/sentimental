@@ -77,10 +77,11 @@ def root():
             Data.add_row(post)
         elif post["submit-type"] == "rm-row":
             Data.rm_row(post)
+        elif post["submit-type"] == "render":
+            Data.update(post)
+            make_graph(post)
         else:
             Data.update(post)
-
-        make_graph(post)
 
     else:
         pass

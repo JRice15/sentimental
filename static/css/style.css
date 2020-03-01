@@ -1,4 +1,8 @@
-/* Add a black background color to the top navigation bar */
+
+body {  
+  min-width:600px; 
+}
+
 
 .blue {
   background-color: #a4e5e7;
@@ -6,13 +10,15 @@
 }
 
 .graph-box {
-  align-content: center;
-  padding: 10px;
+  position: absolute;
+  left: 470px;
+  top: 93px;
   width: 100%;
 }
 
 .topnav {
     overflow: hidden;
+    height: 100%;
   }
   
 /* Style the links inside the navigation bar */
@@ -41,8 +47,9 @@
 /* Style the search box inside the navigation bar */
 .topnav input[type=text], .topnav input[type=number] {
   float: left;
+  padding-left: 20px;
   padding: 6px;
-  border: none;
+  border: 3px black;
   margin-top: 8px;
   margin-right: 4px;
   font-size: 17px;

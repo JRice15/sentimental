@@ -37,8 +37,8 @@
                         <div class="custom-select" style="width:140px; height:26px;">
                             <select id="start-month" name="start-month">
                                 <option value="1">Start month:</option>
-                                <option {{"selected" if ('start-month' not in post) or (post['start-month'] == '1') or (post['start-month'] == "") else ""}} value="1">January</option>
-                                <option {{"selected" if (post['start-month'] == "2") else ""}} value="2">February</option>
+                                <option {{"selected" if (post['start-month'] == "1") else ""}} value="1">January</option>
+                                <option {{"selected" if ('start-month' not in post) or (post['start-month'] == '2') or (post['start-month'] == "") else ""}} value="2">February</option>
                                 <option {{"selected" if (post['start-month'] == "3") else ""}} value="3">March</option>
                                 <option {{"selected" if (post['start-month'] == "4") else ""}} value="4">April</option>
                                 <option {{"selected" if (post['start-month'] == "5") else ""}} value="5">May</option>
@@ -58,7 +58,7 @@
                         <input type="number" id="start-day" name="start-day" min="1" max="31" value="{{ post['start-day'] if ('start-day' in post) else 1 }}" placeholder="Day" style="width:50px">
                     </td>
                     <td>
-                        <input type="number" id="start-year" name="start-year" placeholder="Year" min="2016" max="2020" value="{{ post['start-year'] if ('start-year' in post) else 2016 }}">
+                        <input type="number" id="start-year" name="start-year" placeholder="Year" min="2016" max="2020" value="{{ post['start-year'] if ('start-year' in post) else 2020 }}">
                     </td>
 
                     <td>

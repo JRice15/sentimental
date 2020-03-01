@@ -26,14 +26,14 @@ class Data:
 
     @staticmethod
     def update(post):
+        Data.bins = []
         Data.post = post
 
     @staticmethod
-    def set_bins(bins):
+    def add_bins(bins):
         """
         bins as [ [start, end], ... ]
         """
-        Data.bins = []
         for i in bins:
             Data.bins.append(i[0])
         Data.bins.append(bins[-1][1])

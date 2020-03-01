@@ -151,7 +151,7 @@ def get_binned_sentiment_comments(term, before, after, subreddit = None, numBins
         bin_start = before - 1 + binLength * (i + 1)
         bin_end = before + binLength * i
         Data.set_bins( convert_to_date([bin_start, bin_end]) )
-        thisBin = get_sentiment_comments(term, bin_start, bin_end, subreddit)
+        thisBin = get_sentiment_comments(term, bin_end, bin_start, subreddit)
         
         # add sentiment values
         make_sentiment(thisBin)

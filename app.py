@@ -56,6 +56,10 @@ def root():
         else:
             Data.update(post)
 
+        i = 0
+        while (i < len(Data.bins) - 1):
+            if Data.bins[i] == Data.bins[i+1]:
+                Data.bins.pop(i)
         Data.post["bins"] = Data.bins
 
 

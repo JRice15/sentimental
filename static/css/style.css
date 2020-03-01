@@ -66,7 +66,7 @@ button[type=submit]:hover {
 .topnav input[type=text], .topnav input[type=number] {
   float: left;
   padding-left: 20px;
-  padding: 6px;
+  padding: 5px;
   border: 3px black;
   margin-top: 8px;
   margin-right: 4px;

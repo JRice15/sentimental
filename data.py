@@ -34,7 +34,5 @@ class Data:
         """
         bins as [ [start, end], ... ]
         """
-        for i in bins:
-            Data.bins.append(i[0])
-        Data.bins.append(bins[-1][1])
+        Data.bins.append(bins[0])
 

@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, config, send_from_directory
 from datetime import datetime
 import webbrowser
 from urllib.parse import parse_qsl
 import re
 import get_sentiment as gs
+import os
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 1
@@ -93,6 +94,14 @@ def add_header(response):
     if 'Cache-Control' not in response.headers:
         response.headers['Cache-Control'] = 'no-store'
     return response
+
+
+
+MEDIA_FOLDER = os.path.dirname(__file__)
+
+@app.route('/uploads/<path:filename>')
+def download_file(filename):
+    return send_from_directory(MEDIA_FOLDER, filename, as_attachment=True)
 
 
 if __name__ == "__main__":

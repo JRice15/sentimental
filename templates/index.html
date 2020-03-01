@@ -141,7 +141,7 @@
     <div>
         <object class="graph" type="image/svg+xml" data="result.svg">
             <!-- Your fall back here -->
-            <img src="static/result.svg" />
+            <img src="{{ url_for('download_file', filename='result.svg') }}" />
         </object>
     </div>
         

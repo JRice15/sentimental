@@ -260,7 +260,7 @@ def plot_sentiments_over_time(queries, before, after, numBins = 10):
     labels = [str(query[0]) + ", " + str(query[1]) for query in queries]
     plt.legend(labels,loc='upper left')
 
-    plt.savefig("static/result.svg")
+    plt.savefig("result.svg")
 
 def convert_to_epoch(info):
     """

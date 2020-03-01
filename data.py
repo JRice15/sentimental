@@ -34,4 +34,5 @@ class Data:
         """
         bins as [ [start, end], ... ]
         """
-        Data.bins = bins.reverse() + Data.bins
+        bins.reverse()
+        Data.bins = bins + Data.bins

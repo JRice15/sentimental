@@ -24,7 +24,6 @@ class Data:
 
     @staticmethod
     def clear(post):
-        Data.bins = []
         Data.row_count = 1
         Data.post = {}
 

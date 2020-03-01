@@ -156,13 +156,20 @@ button[type=submit] {
 .bin {
     float: left;
     width: 48px;
-    height: 313px;
+    height: 312px;
     background: rgb(30, 241, 248);
     opacity: 0
 }
 
 .bin:hover {
-  opacity: 0.5;
+  opacity: 0.2;
+}
+
+.binholder {
+    position: absolute; 
+    top: 56px; 
+    left: 77px; 
+    z-index: 45;
 }
 
 

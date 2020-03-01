@@ -17,8 +17,8 @@ You will need to install flask and textblob, and use the following command
 The main architecture is a localhost website with a python and flask backend. 
 When requested, it uses threading to make a request to the pushshift API 
 to gather data from reddit, and textblob to analyze its sentiment. The status
-of the second thread is dislayed in real time on the site, until all queries
-have been loaded, and the page loads the data visualized with matplotlib
+of the second thread is dislayed in real time on the site until all queries
+have been loaded, then page loads the data visualized with matplotlib
 and made interactive with various JavaScript features.
 
 ## Example Usages
@@ -40,3 +40,5 @@ Theo Bayard de Volo, Pitzer
 Julian Rice, Cal Poly  
 
 (all can be found under the Contributers tab)
+
+Created for SLO Hacks 2020

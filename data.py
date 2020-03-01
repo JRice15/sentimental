@@ -34,5 +34,4 @@ class Data:
         """
         bins as [ [start, end], ... ]
         """
-        Data.bins.append(bins[0])
-
+        Data.bins = bins.revered() + Data.bins

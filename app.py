@@ -6,6 +6,7 @@ import re
 import get_sentiment as gs
 import os
 from data import Data
+from collections import OrderedDict
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 1
@@ -53,14 +54,10 @@ def root():
         elif post["submit-type"] == "render":
             Data.update(post)
             make_graph(post)
+            Data.bins = list(OrderedDict.fromkeys(Data.bins))
         else:
             Data.update(post)
 
-        i = 0
-        while (i < len(Data.bins) - 1):
-            if Data.bins[i] == Data.bins[i+1]:
-                Data.bins.pop(i)
-            i += 1
         Data.post["bins"] = Data.bins
 
 

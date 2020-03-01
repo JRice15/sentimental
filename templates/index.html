@@ -22,7 +22,7 @@
         <div>
             <table>
 
-                <button style="position: absolute; left: 100000px;" tabindex="1" id="update" type="submit" name="update" onclick="onSubmit('update')">yuh</button>
+                <button style="position: absolute; left: -100000px;" tabindex="1" id="render" type="submit" name="render" onclick="onSubmit('render')">yuh</button>
 
                 <tr>
                     <td>
@@ -108,7 +108,7 @@
                         <input type="text" id="word" name="word{{i}}" value="{{ post['word{0}'.format(i)] }}" placeholder="Word to search for">
                     </td>
                     <td>
-                        <input type="text" id="sub" name="sub{{i}}" value="{{ post['sub{0}'.format(i)] }}" placeholder="Optional: subreddit">
+                        <input type="text" id="sub" name="sub{{i}}" value="{{ post['sub{0}'.format(i)] }}" placeholder="Subreddit">
                     </td> 
 
                     {% if i == row_count-1 %}
@@ -127,6 +127,7 @@
                 {% endfor %}
                 <tr>
                     <td>
+                        <button id="render2" type="submit" name="render" onclick="onSubmit('render')">Render</button>
                         <button name="clear" type="submit" onclick="onSubmit('clear')">Clear</button>
                     </td>
                 </tr>
@@ -138,7 +139,7 @@
     </div>
 
 
-    <div>
+    <div class="graph-box">
         <object class="graph" type="image/svg+xml" data="result.svg">
             <!-- Your fall back here -->
             <img src="{{ url_for('download_file', filename='result.svg') }}" />

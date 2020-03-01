@@ -6,13 +6,16 @@
 }
 
 .graph-box {
-  align-content: center;
+  position: absolute;
+  left: 480px;
+  top: 100px;
   padding: 10px;
   width: 100%;
 }
 
 .topnav {
     overflow: hidden;
+    height: 100%;
   }
   
 /* Style the links inside the navigation bar */
@@ -42,7 +45,7 @@
 .topnav input[type=text], .topnav input[type=number] {
   float: left;
   padding: 6px;
-  border: none;
+  border: 3px black;
   margin-top: 8px;
   margin-right: 4px;
   font-size: 17px;

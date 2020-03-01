@@ -16,6 +16,13 @@ body {
   width: 100%;
 }
 
+button[type=submit] {
+  padding: 8px;
+  padding-bottom: 9px;
+  margin-top: 8px;
+  background-color: white;
+}
+
 .topnav {
     overflow: hidden;
     height: 100%;

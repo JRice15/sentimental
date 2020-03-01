@@ -111,12 +111,16 @@
 
                     {% if i == row_count-1 %}
                     <td>
-                        <button id="add-row" name="add-row" type="submit" onclick="onSubmit('add-row')">+</button>
+                        <button id="add-row" name="add-row" type="submit" onclick="onSubmit('add-row')">
+                            <strong>+</strong>
+                        </button>
                     </td>
 
                         {% if i != 0 %}
                         <td>
-                            <button id="rm-row" name="rm-row" type="submit" onclick="onSubmit('rm-row')">-</button>
+                            <button id="rm-row" name="rm-row" type="submit" onclick="onSubmit('rm-row')">
+                                <strong>-</strong>
+                            </button>
                         </td>
                         {% endif %}
 

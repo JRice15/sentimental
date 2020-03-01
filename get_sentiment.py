@@ -297,6 +297,8 @@ def plot_sentiments_over_time(queries, before, after, q, numBins = 10):
 
     plt.savefig("result.svg")
 
+    q.put("_bins")
+    q.put(Data.bins)
     q.put("_done")
 
 def average_lol(lol):

@@ -48,10 +48,17 @@ def check_render():
     try:
         item = Data.q.get(False)
         Data.complete_queries += 1
+        if item == "_bins":
+            while True:
+                try:
+                    item = Data.q.get(False)
+                    Data.bins = list(OrderedDict.fromkeys(item))
+                    return jsonify(False, Data.complete_queries, Data.num_queries)
+                except queue.Empty:
+                    time.sleep(0.1)
         if item == "_done":
             Data.p.join()
             Data.p.terminate()
-            Data.bins = list(OrderedDict.fromkeys(Data.bins))
         print(" ", item)
         return jsonify(True, Data.complete_queries, Data.num_queries, item)
     except queue.Empty:
